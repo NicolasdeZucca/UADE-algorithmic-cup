@@ -1,13 +1,13 @@
 """ChatBot python"""
-#Functions
-def escribir_preguntas ():
+# Functions
+def escribir_preguntas (question):
     """
-    Escribe preguntas faltantes de usuarios en un archivo 'preguntas.TODO: FORMATO??
+    Escribe preguntas faltantes de usuarios en un archivo 'preguntas.txt'
     TODO: parametros
     Sin return, solo escribe preguntas faltantes 
     """
-    with open('preguntas.txt', 'w', encoding='UTF-8') as archivo:
-        archivo.write()
+    with open('preguntas.txt', 'w', newline='', encoding='UTF-8') as archivo:
+        archivo.write(question)
 
 def leer_preguntas_respuestas ():
     """
@@ -19,9 +19,9 @@ def leer_preguntas_respuestas ():
     with open('preguntas.txt', 'r', encoding='UTF-8') as archivo:
 
         for line in archivo: # Lee linea por linea el archivo
-            
+
             # Limpia cada linea y las separa entre preguntas y respuestas
-            tupla = tuple(line.strip().replace('\n','').split(':')) 
+            tupla = tuple(line.strip().replace('\n','').split(':'))
             preguntas_respuestas.append(tupla)
 
 
@@ -29,30 +29,8 @@ def leer_preguntas_respuestas ():
 
 
 
+def app ():
 
-# Seleccion de lenguaje
-language = print("Select a language")
-print("1- Español")
-print("2- Ingles")
-print("3- Portugues")
-
-
-# Validacion elección de lenguaje
-while True:
-    try:
-        language = int(input("\nLanguage (1 - 2 - 3): "))
-        if 1 <= language <= 3:
-            break
-
-        print("You must enter a valid language.")
-        print("Please, select a valid option (1 - 2 - 3): ")
-
-    except ValueError:
-        print("Error: you must enter a number. Try again.")
-
-
-
-if language == 1: #Español
     print("\n¡Bienvenido a Catbot! 😺 \nSoy tu asistente virtual inspirado en los gatos de la universidad.\nTe ayudaré con información útil sobre la UADE.\n")
 
     print("Elije una personalidad para el gato de UADE con el que interactuarás")
@@ -80,50 +58,42 @@ if language == 1: #Español
     #      sino no repetir codigo "leer_preguntas"
 
     if personalidad == 1: #Amigable
-        print("\nHola soy Nalaa! Temas para solucionar:\n") #TODO: Reemplazar el texto del print
-
+        print("\nHola soy Nalaa! Temas para solucionar:\n")
+        
+        
         preguntas = leer_preguntas_respuestas()
 
         # Mostrar preguntas enumeradas al usuario
         #TODO: Si lo personalizamos en 3 personalidades = reutilizar el for y validacion -> function
-        for i, pregunta in enumerate(preguntas):
-            print(f"{i+1}- {pregunta[0]}")
-
         while True:
+            for i, pregunta in enumerate(preguntas):
+                print(f"{i+1}- {pregunta[0]}")
+
+            print("0- Salir")
+
+        
             try:
-                opcion = int(input("¿Que necesitas resolver?(Indica el número de pregunta): "))
-                if 0 < opcion < len(preguntas) + 1:
+                opcion = int(input("¿Que necesitas resolver?(Indica el número de pregunta - 0 para salir): "))
+                if opcion == 0:
+                    print("Hasta luego!")
                     break
+                elif 0 < opcion < len(preguntas) + 1:
+                    respuesta = preguntas[opcion-1]
+                    print(f"\nLa respuesta a esa pregunta es: {respuesta[1]}\n")
 
-                print(f"Debes ingresar un número válido del 1 al {len(preguntas)} ")
+                else:
+                    print(f"\nDebes ingresar un número válido del 1 al {len(preguntas)}\n")
             except ValueError:
-                print("Error: debes ingresar un número.")
+                print("\nError: debes ingresar un número.\n")
 
-        respuesta = preguntas[opcion-1]
-        print(f"\nLa respuesta a esa pregunta es: {respuesta[1]}")
+            
 
 
 
     elif personalidad == 2: # Curioso
-        print("Soy Luigi! ¿Para que quieres usar esta herramienta hoy?")
-        leer_preguntas_respuestas()
+        print("Soy Luigi! Actualmente estammos trabajando en esta version.")
 
     else: # Cariñoso
-        print("Soy Otto! ¿Cómo estas?")
-        leer_preguntas_respuestas()
-
-
-
-
-
-
-
-
-elif language == 2: #Ingles
-    print("TODO: bienvenido en ingles")
-
-elif language == 3: #Portugues
-    print("TODO: bienvenido en portugues")
-
-else:
-    print("Hubo un error en la seleccion de lenguajes.")
+        print("Soy Otto! ¿Cómo estas? Actualmente estammos trabajando en esta version.")
+        
+app()
