@@ -3,7 +3,7 @@
 def escribir_preguntas (question):
     """
     Escribe preguntas faltantes de usuarios en un archivo 'preguntas.txt'
-    TODO: parametros
+    Parametros: Una pregunta del usuario 
     Sin return, solo escribe preguntas faltantes 
     """
     with open('preguntas.txt', 'w', newline='', encoding='UTF-8') as archivo:
@@ -12,7 +12,7 @@ def escribir_preguntas (question):
 def leer_preguntas_respuestas ():
     """
     Funcion que lee preguntas del archivo 'preguntas.txt'
-    TODO: parametros
+    No recibe parametros.
     retorna las preguntas del archivo 'preguntas.txt'
     """
     preguntas_respuestas = []
@@ -54,9 +54,6 @@ def app ():
 
 
     # personalidades posibles
-    #TODO: Si vamos a hacer distintas preguntas segun la personalidad dejar "leer_preguntas"
-    #      sino no repetir codigo "leer_preguntas"
-
     if personalidad == 1: #Amigable
         print("\nHola soy Nalaa! Temas para solucionar:\n")
         
@@ -64,7 +61,6 @@ def app ():
         preguntas = leer_preguntas_respuestas()
 
         # Mostrar preguntas enumeradas al usuario
-        #TODO: Si lo personalizamos en 3 personalidades = reutilizar el for y validacion -> function
         while True:
             for i, pregunta in enumerate(preguntas):
                 print(f"{i+1}- {pregunta[0]}")
